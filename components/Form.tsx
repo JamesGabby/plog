@@ -2,13 +2,11 @@ import Link from "next/link"
 
 const Form = ({ type, post, setPost, submitting, handleSubmit }) => {
   return (
-    <section className="black">
+    <section className="text-center">
         <h1 className="">
             <span className="">{type} Post</span>
         </h1>
-        <p className="">
-            {type} and share amazing prompts with the world and let your imagiantion run wild be any AI-powered platform
-        </p>
+
         <form onSubmit={handleSubmit} className="">
             <label>
                 <span className="block">
