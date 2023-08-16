@@ -27,7 +27,7 @@ export default function Home() {
           })
 
           if (response.ok) {
-              router.push('/')
+            location.reload()
           }
       } catch (error) {
           console.log(error)
