@@ -17,8 +17,8 @@ const UserPost = ({ params }) => {
     }, [])
 
     return (
-        <div>
-            <h1>{post.title}</h1>
+        <div className='p-20'>
+            <h1 className='text-xl text-center pb-4'>{post.title}</h1>
             <p>{post.body}</p>
         </div>
     )
