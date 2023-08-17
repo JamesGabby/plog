@@ -17,7 +17,6 @@ export default function Home() {
     const fetchPrompts = async () => {
       const response = await fetch('/api/post')
       const data = await response.json()
-      console.log(data)
 
       setPosts(data)
     }
@@ -26,24 +25,24 @@ export default function Home() {
   }, [])
 
   const createPrompt = async (event: MouseEvent) => {
-      event.preventDefault()
-      setSubmitting(true)
+    event.preventDefault()
+    setSubmitting(true)
 
-      try {
-          const response = await fetch('/api/post/new', {
-              method: 'POST',
-              body: JSON.stringify({
-                  title: post.title,
-                  body: post.body
-              })
-          })
+    try {
+      const response = await fetch('/api/post/new', {
+        method: 'POST',
+        body: JSON.stringify({
+          title: post.title,
+          body: post.body
+        })
+      })
 
-          if (response.ok) {
-            location.reload()
-          }
-      } catch (error) {
-          console.log(error)
+      if (response.ok) {
+        location.reload()
       }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   return (
@@ -61,31 +60,28 @@ export default function Home() {
       </div>
 
       <Form 
-          type="Create"
-          post={post}
-          setPost={setPost}
-          submitting={submitting}
-          handleSubmit={createPrompt}
+        type="Create"
+        post={post}
+        setPost={setPost}
+        submitting={submitting}
+        handleSubmit={createPrompt}
       />
       
       <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-      {posts.map(post => (
-        <Link
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            {post.title}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-        </Link>
+        {posts.map(post => (
+          <Link
+            href={`/post/${post._id}`}
+            className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
+          >
+            <h2 className={`mb-3 text-2xl font-semibold`}>
+              {post.title}
+              <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
+                -&gt;
+              </span>
+            </h2>
+          </Link>
         ))}
       </div>
-      
     </main>
   )
 }
